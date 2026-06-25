@@ -12,9 +12,9 @@
   --max-width: 860px; --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 [data-theme="dark"] {
-  --accent: #5BA3D9; --accent-light: #7CBCE6; --bg: #0F1419; --bg-alt: #1A2332;
-  --text: #E8EAED; --text-secondary: #9AA0A6; --border: #2D3748;
-  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --accent: #5BA3D9; --accent-light: #7CBCE6; --bg: #111111; --bg-alt: #1C1C1E;
+  --text: #E8EAED; --text-secondary: #9AA0A6; --border: #333;
+  --shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 15px; }
@@ -23,36 +23,55 @@ body { font-family: var(--font); color: var(--text); background: var(--bg);
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .container { max-width: var(--max-width); margin: 0 auto; padding: 2rem 2rem 4rem; }
+
+/* Toolbar */
 .toolbar { position: fixed; top: 0; right: 0; display: flex; gap: 0.5rem; padding: 1rem; z-index: 100; }
 .toolbar button { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-secondary);
   padding: 0.4rem 0.75rem; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem;
   transition: all var(--transition); }
 .toolbar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Header */
 .header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--accent); }
-.header h1 { font-size: 2.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-.contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.5rem;
+.header h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; }
+.contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem;
   font-size: 0.9rem; color: var(--text-secondary); }
-.contact a { color: var(--text-secondary); }
-.contact a:hover { color: var(--accent); }
-.contact-item::before { content: ''; display: inline-block; width: 4px; height: 4px;
-  background: var(--accent); border-radius: 50%; vertical-align: middle; margin-right: 0.5rem; }
-.contact-item:first-child::before { display: none; }
-.section { margin-bottom: 1.75rem; }
+.contact a { color: var(--text-secondary); transition: color var(--transition); }
+.contact a:hover { color: var(--accent); text-decoration: none; }
+.contact-item { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+/* Sections */
+.section { margin-bottom: 2rem; opacity: 0; transform: translateY(12px);
+  animation: fadeIn 0.5s ease forwards; }
+.section:nth-child(1) { animation-delay: 0s; }
+.section:nth-child(2) { animation-delay: 0.08s; }
+.section:nth-child(3) { animation-delay: 0.16s; }
+.section:nth-child(4) { animation-delay: 0.24s; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 .section-title { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 0.3rem; margin-bottom: 0.75rem; }
+
+/* Summary */
 .summary { font-size: 0.95rem; line-height: 1.7; }
 .summary .highlight { color: var(--accent); font-weight: 600; }
+
+/* Skills */
 .skills-grid { display: grid; grid-template-columns: 150px 1fr; gap: 0.3rem 1rem;
   align-items: baseline; font-size: 0.9rem; }
 .skill-category { font-weight: 700; color: var(--accent); white-space: nowrap; padding: 0.15rem 0; }
 .skill-items { padding: 0.15rem 0; }
-.skill-items .sep { color: var(--border); margin: 0 0.2rem; }
+.skill-items .sep { color: var(--border); margin: 0 0.15rem; }
 .cert-row { grid-column: 1 / -1; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
 .cert-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-alt);
   border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: var(--radius);
   font-size: 0.85rem; transition: all var(--transition); }
-.cert-badge:hover { border-color: var(--accent); text-decoration: none; }
-.job { margin-bottom: 1.25rem; }
+.cert-badge:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-1px); }
+
+/* Jobs */
+.job { margin-bottom: 1.5rem; }
 .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.25rem; }
 .job-company { font-weight: 700; font-size: 1rem; }
 .job-location { color: var(--text-secondary); font-style: italic; font-size: 0.9rem; }
@@ -60,29 +79,50 @@ a:hover { text-decoration: underline; }
   flex-wrap: wrap; margin-bottom: 0.5rem; }
 .job-title { font-weight: 600; font-style: italic; font-size: 0.95rem; }
 .job-dates { color: var(--text-secondary); font-style: italic; font-size: 0.9rem; white-space: nowrap; }
+
+/* Bullets */
 .bullets { list-style: none; padding: 0; }
-.bullets li { position: relative; padding-left: 1.1rem; margin-bottom: 0.35rem; font-size: 0.9rem; line-height: 1.55; }
+.bullets li { position: relative; padding-left: 1.1rem; margin-bottom: 0.4rem; font-size: 0.9rem;
+  line-height: 1.55; transition: color var(--transition); }
 .bullets li::before { content: ''; position: absolute; left: 0; top: 0.55rem;
-  width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
-.bullet-detail { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+  width: 5px; height: 5px; background: var(--accent); border-radius: 50%;
+  transition: transform var(--transition); }
+
+/* Expandable */
+.bullet-detail { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease, padding 0.3s ease;
   font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-alt);
-  border-radius: var(--radius); padding: 0 0.75rem; margin-top: 0; }
-.bullet-detail.open { max-height: 200px; padding: 0.5rem 0.75rem; margin-top: 0.3rem; }
+  border-radius: var(--radius); margin-top: 0; border-left: 3px solid var(--accent); }
+.bullet-detail > div { overflow: hidden; }
+.bullet-detail.open { grid-template-rows: 1fr; padding: 0; margin-top: 0.3rem; }
+.bullet-detail.open > div { padding: 0.5rem 0.75rem; }
 .bullets li.expandable { cursor: pointer; }
 .bullets li.expandable:hover { color: var(--accent); }
-.expand-hint { font-size: 0.7rem; color: var(--text-secondary); opacity: 0.5; margin-left: 0.3rem; }
+.bullets li.expandable:hover::before { transform: scale(1.4); }
+.expand-hint { font-size: 0.65rem; color: var(--text-secondary); opacity: 0.4; margin-left: 0.3rem;
+  transition: transform 0.2s ease, opacity 0.2s ease; display: inline-block; }
+.bullets li.expandable.active .expand-hint { transform: rotate(180deg); opacity: 0.7; }
+
+/* Education */
 .edu-school { font-weight: 700; }
 .edu-detail { font-style: italic; color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Footer */
 .footer { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--border);
   font-size: 0.75rem; color: var(--text-secondary); }
+
+/* Print */
 @media print {
   .toolbar, .expand-hint, .footer { display: none !important; }
   .bullet-detail { display: none !important; }
+  .section { opacity: 1; transform: none; animation: none; }
   body { font-size: 10pt; background: #fff; color: #000; }
+  .header h1 { -webkit-text-fill-color: #1F4E78; }
   .container { max-width: 100%; padding: 0; }
   a { color: #000; }
   .job { page-break-inside: avoid; }
 }
+
+/* Mobile */
 @media (max-width: 600px) {
   html { font-size: 14px; }
   .container { padding: 1rem; }
@@ -154,14 +194,14 @@ a:hover { text-decoration: underline; }
         <span class="job-dates">Jan 2020 – Oct 2021</span>
       </div>
       <ul class="bullets">
-        <li>Architected a 22-domain enterprise ETL platform (70+ production Python applications) processing 10M+ daily records across AWS, Snowflake, Databricks, and MSSQL for wireless retail operations</li>
-        <li class="expandable" onclick="toggleDetail(this)">Eliminated recurring production outages across 70+ production applications &mdash; saving 100+ engineering hours/month &mdash; via 15-pattern retry logic, connection pooling, and 8 self-healing watchdog services<span class="expand-hint">&#9662;</span><div class="bullet-detail">The retry mechanism existed but only matched the exact string &quot;connection error.&quot; 502s, socket hang-ups, idle timeouts, and rate limits all crashed without retrying. Broadened to a 15-pattern list and built 8 watchdog services with 5-minute heartbeats and @reboot recovery. Cost of an unnecessary retry is tiny; cost of a false negative is total job failure.</div></li>
-        <li class="expandable" onclick="toggleDetail(this)">Engineered a customer feedback pipeline (Qualtrics &rarr; Snowflake &rarr; Tableau &rarr; automated alerts) across ~1,000 stores, driving a 5-point CSAT lift (79.1% &rarr; 84%)<span class="expand-hint">&#9662;</span><div class="bullet-detail">Closed the post-store-visit feedback loop: automated ETL captures Qualtrics survey results, lands in Snowflake, surfaces via Tableau dashboards for the CXO team, and individually emails weekly negative-survey results to ~1,000 store managers.</div></li>
-        <li>Designed National Retail analytics integrating 6+ major retailers (Best Buy, Target, Walmart, Kroger, Amazon) via Databricks Cloud Feeds, REST APIs, and EDI with real-time device tracking and inventory reconciliation, supporting $10M+ monthly revenue</li>
-        <li>Built Foot Traffic Analytics platform ingesting 40,000+ daily records from 3,000+ stores with ML forecasting (Prophet + XGBoost) achieving 96% accuracy for supply chain planning</li>
-        <li>Optimized Snowflake stored procedures, cutting query load times 70% (20 min &rarr; &lt;5 min); automated executive reporting via Tableau Server API, eliminating 8+ hours/week manual work</li>
-        <li class="expandable" onclick="toggleDetail(this)">Launched the organization&rsquo;s first AI-powered analytics assistant &mdash; a Google Chat bot (GCP Pub/Sub) enabling stakeholders to query enterprise data through natural language<span class="expand-hint">&#9662;</span><div class="bullet-detail">Subprocess wrapper around Claude Code CLI with institutional knowledge encoding (proxy routing, credential patterns, table-of-truth mappings). Iterated through 4 major versions. Tiered tool-call budgets (25/10/3 by user role), defense-in-depth output sanitization, fast-handler intercepts for sub-2-second queries, and a 69-test automated suite. Autonomy is a spectrum, not a binary.</div></li>
-        <li>Reviewed code and mentored 3 junior engineers, establishing Python and pipeline standards adopted team-wide; partnered with product and business teams to scope data requirements for new retail launches</li>
+        <li class="expandable" onclick="toggleDetail(this)">Architected a 22-domain enterprise ETL platform (70+ production Python applications) processing 10M+ daily records across AWS, Snowflake, Databricks, and MSSQL for wireless retail operations<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>The platform spans 22 distinct data domains — from foot traffic and compensation to Starlink, GIS, and real estate — each with its own ingestion cadence, schema evolution, and downstream consumers. Built with standardized adapter patterns so new domains onboard in days rather than weeks, with unified logging, alerting, and credential management across AWS, Snowflake, Databricks, and MSSQL.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Eliminated recurring production outages across 70+ production applications &mdash; saving 100+ engineering hours/month &mdash; via 15-pattern retry logic, connection pooling, and 8 self-healing watchdog services<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>The existing retry logic only matched the exact string &quot;connection error&quot; — 502s, socket hang-ups, idle timeouts, token expirations, and rate limits all crashed silently without retrying. Reverse-engineered failure logs across all 70+ apps to build a 15-pattern exception taxonomy, then implemented connection pooling and exponential backoff with jitter. Eight watchdog services run 5-minute heartbeat checks with @reboot cron recovery.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Engineered a customer feedback pipeline (Qualtrics &rarr; Snowflake &rarr; Tableau &rarr; automated alerts) across ~1,000 stores, driving a 5-point CSAT lift (79.1% &rarr; 84%)<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Before this pipeline, store managers had zero visibility into their own CSAT scores — negative experiences disappeared into a Qualtrics void. Built end-to-end ETL that captures survey responses, lands them in Snowflake with store-level attribution, surfaces trends via Tableau dashboards for the CXO team, and auto-emails weekly negative-survey digests to ~1,000 individual store managers.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Designed National Retail analytics integrating 6+ major retailers (Best Buy, Target, Walmart, Kroger, Amazon) via Databricks Cloud Feeds, REST APIs, and EDI with real-time device tracking and inventory reconciliation, supporting $10M+ monthly revenue<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Each retailer delivers data differently — Best Buy via REST APIs, Walmart via Databricks Cloud Feeds (migrated from legacy EDI, validated to 0.1% variance over a 30-day parallel run), others through EDI and flat-file drops. Designed a unified ingestion layer that normalizes device-level activation, inventory, and revenue data across all partners into a single Snowflake schema.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Built Foot Traffic Analytics platform ingesting 40,000+ daily records from 3,000+ stores with ML forecasting (Prophet + XGBoost) achieving 96% accuracy for supply chain planning<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>ShopperTrak sensor data from 3,000+ stores initially landed in Google Sheets, which hit the 10M cell limit within weeks — solved with dynamic cell-budget overwrites and 30-minute aggregation rollups before migrating to Snowflake. Prophet handles trend/seasonality decomposition while XGBoost captures feature-rich short-term patterns, achieving 96% accuracy at the store-week level.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Optimized Snowflake stored procedures, cutting query load times 70% (20 min &rarr; &lt;5 min); automated executive reporting via Tableau Server API, eliminating 8+ hours/week manual work<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Several executive-facing stored procedures had ballooned to 20-minute runtimes due to unoptimized joins, missing clustering keys, and full-table scans on billion-row tables. Rewrote critical paths with proper clustering, predicate pushdown, and incremental materialization. Then automated downstream Tableau workbook refreshes and PDF distribution via the Server REST API.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Launched the organization&rsquo;s first AI-powered analytics assistant &mdash; a Google Chat bot (GCP Pub/Sub) enabling stakeholders to query enterprise data through natural language<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Built as a subprocess wrapper around Claude Code CLI, encoding institutional knowledge — schema definitions, business logic, access policies — so stakeholders could query enterprise data through natural language in Google Chat. Architecture uses GCP Pub/Sub for message routing with tiered tool-call budgets (25/10/3 by user role), defense-in-depth output sanitization, and fast-handler intercepts for sub-2-second responses. Four major iterations and a 69-test suite brought it from prototype to a daily-use production tool.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Reviewed code and mentored 3 junior engineers, establishing Python and pipeline standards adopted team-wide; partnered with product and business teams to scope data requirements for new retail launches<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Established the team&#x27;s first formal Python style guide and pipeline design patterns — error handling, logging conventions, config management, testing requirements — adopted across all new development. Paired with three junior engineers on architecture decisions, helping them progress from writing scripts to owning full production domains.</div></div></li>
       </ul>
     </div>
 
@@ -175,8 +215,8 @@ a:hover { text-decoration: underline; }
         <span class="job-dates">Feb 2018 – Jan 2020</span>
       </div>
       <ul class="bullets">
-        <li>Delivered $250K+ annual savings by automating agent workflows, improving productivity 13% and eliminating the need for 5+ additional hires</li>
-        <li>Developed real-time customer service analytics for 100+ agents, improving response times 25% and satisfaction scores 15%; engineered fraud detection filtering for agent performance metrics</li>
+        <li class="expandable" onclick="toggleDetail(this)">Delivered $250K+ annual savings by automating agent workflows, improving productivity 13% and eliminating the need for 5+ additional hires<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Customer care leadership was preparing to hire 5+ additional agents at ~$50K each to handle growing volume. Built tools that streamlined agent task queues, auto-populated form fields, and eliminated redundant data entry, improving per-agent productivity by 13%. The automation paid for itself immediately and absorbed the volume increase with existing headcount.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Developed real-time customer service analytics for 100+ agents, improving response times 25% and satisfaction scores 15%; engineered fraud detection filtering for agent performance metrics<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Built live dashboards tracking 100+ agent metrics — handle time, queue depth, resolution rate — with refresh intervals short enough for supervisors to intervene during shifts, not after. The fraud detection component flagged agents gaming performance metrics through specific call-handling patterns using statistical filters that identified anomalous behavior without penalizing legitimate outliers.</div></div></li>
       </ul>
     </div>
 
@@ -190,8 +230,8 @@ a:hover { text-decoration: underline; }
         <span class="job-dates">Feb 2015 – Feb 2018</span>
       </div>
       <ul class="bullets">
-        <li>Automated reporting for a Top 4 U.S. Bank using Python, SQL, and VBA, replacing 40 hours/week manual work; promoted to specialized role recognizing automation expertise</li>
-        <li>Managed client delivery on the largest financial services engagement in company history, presenting analytics and project updates to C-level bank executives</li>
+        <li class="expandable" onclick="toggleDetail(this)">Automated reporting for a Top 4 U.S. Bank using Python, SQL, and VBA, replacing 40 hours/week manual work; promoted to specialized role recognizing automation expertise<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>Analysts were spending 40+ hours per week manually pulling data from multiple systems, formatting Excel reports, and distributing them — replaced the entire workflow with Python scripts, SQL stored procedures, and VBA macros that ran unattended. The automation was reliable enough that the team shifted from producing reports to actually analyzing them. NTT Data created a new specialized role specifically in recognition of the automation impact.</div></div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Managed client delivery on the largest financial services engagement in company history, presenting analytics and project updates to C-level bank executives<span class="expand-hint">&#9662;</span><div class="bullet-detail"><div>This was NTT Data&#x27;s largest financial services engagement by headcount and revenue, supporting a Top 4 U.S. Bank&#x27;s operations. Managed delivery timelines and cross-team dependencies, then distilled complex data findings into executive-ready presentations for C-level bank stakeholders. The experience shaped how I scope and communicate every project since.</div></div></li>
       </ul>
     </div>
   </section>
@@ -210,11 +250,12 @@ function toggleTheme() {
   if (h.getAttribute('data-theme') === 'dark') { h.setAttribute('data-theme','light'); b.textContent='Dark'; }
   else { h.setAttribute('data-theme','dark'); b.textContent='Light'; }
 }
-function toggleDetail(li) { const d = li.querySelector('.bullet-detail'); if(d) d.classList.toggle('open'); }
+function toggleDetail(li) { const d = li.querySelector('.bullet-detail'); if(d) { d.classList.toggle('open'); li.classList.toggle('active'); } }
 function toggleDetails() {
   const ds = document.querySelectorAll('.bullet-detail'), b = document.getElementById('detail-btn');
   const any = Array.from(ds).some(d => d.classList.contains('open'));
   ds.forEach(d => { if(any) d.classList.remove('open'); else d.classList.add('open'); });
+  document.querySelectorAll('.expandable').forEach(li => { if(any) li.classList.remove('active'); else li.classList.add('active'); });
   b.textContent = any ? '+ Details' : '- Details';
 }
 </script>
