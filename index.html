@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRANT LANGE — Senior Data Engineer</title>
+<style>
+:root {
+  --accent: #1F4E78; --accent-light: #2D6FA3; --bg: #FFFFFF; --bg-alt: #F7F9FC;
+  --text: #1A1A1A; --text-secondary: #555; --border: #E2E8F0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08); --radius: 6px; --transition: 0.25s ease;
+  --max-width: 860px; --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+[data-theme="dark"] {
+  --accent: #5BA3D9; --accent-light: #7CBCE6; --bg: #0F1419; --bg-alt: #1A2332;
+  --text: #E8EAED; --text-secondary: #9AA0A6; --border: #2D3748;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body { font-family: var(--font); color: var(--text); background: var(--bg);
+  line-height: 1.6; transition: background var(--transition), color var(--transition); }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 2rem 2rem 4rem; }
+.toolbar { position: fixed; top: 0; right: 0; display: flex; gap: 0.5rem; padding: 1rem; z-index: 100; }
+.toolbar button { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-secondary);
+  padding: 0.4rem 0.75rem; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem;
+  transition: all var(--transition); }
+.toolbar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--accent); }
+.header h1 { font-size: 2.2rem; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.5rem;
+  font-size: 0.9rem; color: var(--text-secondary); }
+.contact a { color: var(--text-secondary); }
+.contact a:hover { color: var(--accent); }
+.contact-item::before { content: ''; display: inline-block; width: 4px; height: 4px;
+  background: var(--accent); border-radius: 50%; vertical-align: middle; margin-right: 0.5rem; }
+.contact-item:first-child::before { display: none; }
+.section { margin-bottom: 1.75rem; }
+.section-title { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 0.3rem; margin-bottom: 0.75rem; }
+.summary { font-size: 0.95rem; line-height: 1.7; }
+.summary .highlight { color: var(--accent); font-weight: 600; }
+.skills-grid { display: grid; grid-template-columns: 150px 1fr; gap: 0.3rem 1rem;
+  align-items: baseline; font-size: 0.9rem; }
+.skill-category { font-weight: 700; color: var(--accent); white-space: nowrap; padding: 0.15rem 0; }
+.skill-items { padding: 0.15rem 0; }
+.skill-items .sep { color: var(--border); margin: 0 0.2rem; }
+.cert-row { grid-column: 1 / -1; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+.cert-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--bg-alt);
+  border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: var(--radius);
+  font-size: 0.85rem; transition: all var(--transition); }
+.cert-badge:hover { border-color: var(--accent); text-decoration: none; }
+.job { margin-bottom: 1.25rem; }
+.job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.25rem; }
+.job-company { font-weight: 700; font-size: 1rem; }
+.job-location { color: var(--text-secondary); font-style: italic; font-size: 0.9rem; }
+.job-title-line { display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; margin-bottom: 0.5rem; }
+.job-title { font-weight: 600; font-style: italic; font-size: 0.95rem; }
+.job-dates { color: var(--text-secondary); font-style: italic; font-size: 0.9rem; white-space: nowrap; }
+.bullets { list-style: none; padding: 0; }
+.bullets li { position: relative; padding-left: 1.1rem; margin-bottom: 0.35rem; font-size: 0.9rem; line-height: 1.55; }
+.bullets li::before { content: ''; position: absolute; left: 0; top: 0.55rem;
+  width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+.bullet-detail { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+  font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; background: var(--bg-alt);
+  border-radius: var(--radius); padding: 0 0.75rem; margin-top: 0; }
+.bullet-detail.open { max-height: 200px; padding: 0.5rem 0.75rem; margin-top: 0.3rem; }
+.bullets li.expandable { cursor: pointer; }
+.bullets li.expandable:hover { color: var(--accent); }
+.expand-hint { font-size: 0.7rem; color: var(--text-secondary); opacity: 0.5; margin-left: 0.3rem; }
+.edu-school { font-weight: 700; }
+.edu-detail { font-style: italic; color: var(--text-secondary); font-size: 0.9rem; }
+.footer { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid var(--border);
+  font-size: 0.75rem; color: var(--text-secondary); }
+@media print {
+  .toolbar, .expand-hint, .footer { display: none !important; }
+  .bullet-detail { display: none !important; }
+  body { font-size: 10pt; background: #fff; color: #000; }
+  .container { max-width: 100%; padding: 0; }
+  a { color: #000; }
+  .job { page-break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  html { font-size: 14px; }
+  .container { padding: 1rem; }
+  .header h1 { font-size: 1.8rem; }
+  .skills-grid { grid-template-columns: 1fr; gap: 0.2rem; }
+  .job-header, .job-title-line { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode">Dark</button>
+  <button onclick="window.print()" title="Print / Save as PDF">Print</button>
+  <button onclick="toggleDetails()" id="detail-btn" title="Expand/collapse details">+ Details</button>
+</div>
+<div class="container">
+  <header class="header">
+    <h1>GRANT LANGE</h1>
+    <div class="contact">
+      <span class="contact-item">Denver, CO</span>
+      <span class="contact-item"><a href="mailto:grant.h.lange@gmail.com">grant.h.lange@gmail.com</a></span>
+      <span class="contact-item"><a href="tel:+13039075870">(303) 907-5870</a></span>
+      <span class="contact-item"><a href="https://linkedin.com/in/grantlange" target="_blank">linkedin.com/in/grantlange</a></span>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-title">Professional Summary</div>
+    <p class="summary">Senior Data Engineer who architected DISH Wireless&rsquo;s 22-domain retail data platform &mdash; <span class="highlight">70+ production pipelines</span>, <span class="highlight">10M+ daily records</span>, AWS + Snowflake + Databricks &mdash; across an 11-year career in data engineering, including <span class="highlight">8+ years in wireless telecommunications</span>. Delivered near-zero production failures across 70+ pipelines, <span class="highlight">5-point CSAT lift</span>, and <span class="highlight">$250K+ annual cost savings</span>. Designed the organization&rsquo;s first AI-powered analytics assistant, a Google Chat bot (GCP Pub/Sub) enabling natural-language data querying across 7+ backend systems.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <span class="skill-category">AI &amp; Automation</span>
+      <span class="skill-items">Agent Orchestration  <span class="sep">|</span>  Databricks Genie  <span class="sep">|</span>  LLM APIs (Anthropic Claude, OpenAI)  <span class="sep">|</span>  Prompt Engineering</span>
+      <span class="skill-category">BI &amp; Tools</span>
+      <span class="skill-items">Plotly  <span class="sep">|</span>  Streamlit  <span class="sep">|</span>  Tableau (Server Client API)</span>
+      <span class="skill-category">Cloud &amp; Databases</span>
+      <span class="skill-items">AWS (S3, Athena, Glue, Lambda)  <span class="sep">|</span>  Databricks  <span class="sep">|</span>  MSSQL  <span class="sep">|</span>  MySQL  <span class="sep">|</span>  PostgreSQL  <span class="sep">|</span>  Snowflake (Certified)</span>
+      <span class="skill-category">Data Engineering</span>
+      <span class="skill-items">Data Architecture  <span class="sep">|</span>  Data Modeling  <span class="sep">|</span>  Data Quality  <span class="sep">|</span>  Data Transformation  <span class="sep">|</span>  ETL/ELT  <span class="sep">|</span>  REST APIs</span>
+      <span class="skill-category">DevOps &amp; Infra</span>
+      <span class="skill-items">CI/CD  <span class="sep">|</span>  Cron  <span class="sep">|</span>  Docker  <span class="sep">|</span>  Git  <span class="sep">|</span>  Linux (RHEL 8)  <span class="sep">|</span>  SFTP/PGP  <span class="sep">|</span>  Watchdog Systems</span>
+      <span class="skill-category">Languages</span>
+      <span class="skill-items">Python (Pandas, NumPy, PySpark/Spark, SQLAlchemy, Selenium)  <span class="sep">|</span>  SQL (Advanced)  <span class="sep">|</span>  Bash  <span class="sep">|</span>  VBA</span>
+      <div class="cert-row">
+        <a class="cert-badge" href="#" title="Verify certification">
+          <span style="font-size:1rem">&#x1F3C5;</span>
+          <span>Snowflake Hands-On Essentials — Data Warehousing (2024)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Professional Experience</div>
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">DISH NETWORK</span>
+        <span class="job-location">Littleton, CO</span>
+      </div>
+      <div class="job-title-line">
+        <span class="job-title">Senior Data Engineer</span>
+        <span class="job-dates">Oct 2021 – Present</span>
+      </div>
+      <div class="job-title-line" style="margin-bottom:0.5rem">
+        <span class="job-title">Data Engineer II</span>
+        <span class="job-dates">Jan 2020 – Oct 2021</span>
+      </div>
+      <ul class="bullets">
+        <li>Architected a 22-domain enterprise ETL platform (70+ production Python applications) processing 10M+ daily records across AWS, Snowflake, Databricks, and MSSQL for wireless retail operations</li>
+        <li class="expandable" onclick="toggleDetail(this)">Eliminated recurring production outages across 70+ production applications &mdash; saving 100+ engineering hours/month &mdash; via 15-pattern retry logic, connection pooling, and 8 self-healing watchdog services<span class="expand-hint">&#9662;</span><div class="bullet-detail">The retry mechanism existed but only matched the exact string &quot;connection error.&quot; 502s, socket hang-ups, idle timeouts, and rate limits all crashed without retrying. Broadened to a 15-pattern list and built 8 watchdog services with 5-minute heartbeats and @reboot recovery. Cost of an unnecessary retry is tiny; cost of a false negative is total job failure.</div></li>
+        <li class="expandable" onclick="toggleDetail(this)">Engineered a customer feedback pipeline (Qualtrics &rarr; Snowflake &rarr; Tableau &rarr; automated alerts) across ~1,000 stores, driving a 5-point CSAT lift (79.1% &rarr; 84%)<span class="expand-hint">&#9662;</span><div class="bullet-detail">Closed the post-store-visit feedback loop: automated ETL captures Qualtrics survey results, lands in Snowflake, surfaces via Tableau dashboards for the CXO team, and individually emails weekly negative-survey results to ~1,000 store managers.</div></li>
+        <li>Designed National Retail analytics integrating 6+ major retailers (Best Buy, Target, Walmart, Kroger, Amazon) via Databricks Cloud Feeds, REST APIs, and EDI with real-time device tracking and inventory reconciliation, supporting $10M+ monthly revenue</li>
+        <li>Built Foot Traffic Analytics platform ingesting 40,000+ daily records from 3,000+ stores with ML forecasting (Prophet + XGBoost) achieving 96% accuracy for supply chain planning</li>
+        <li>Optimized Snowflake stored procedures, cutting query load times 70% (20 min &rarr; &lt;5 min); automated executive reporting via Tableau Server API, eliminating 8+ hours/week manual work</li>
+        <li class="expandable" onclick="toggleDetail(this)">Launched the organization&rsquo;s first AI-powered analytics assistant &mdash; a Google Chat bot (GCP Pub/Sub) enabling stakeholders to query enterprise data through natural language<span class="expand-hint">&#9662;</span><div class="bullet-detail">Subprocess wrapper around Claude Code CLI with institutional knowledge encoding (proxy routing, credential patterns, table-of-truth mappings). Iterated through 4 major versions. Tiered tool-call budgets (25/10/3 by user role), defense-in-depth output sanitization, fast-handler intercepts for sub-2-second queries, and a 69-test automated suite. Autonomy is a spectrum, not a binary.</div></li>
+        <li>Reviewed code and mentored 3 junior engineers, establishing Python and pipeline standards adopted team-wide; partnered with product and business teams to scope data requirements for new retail launches</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">DISH NETWORK — SLING TV</span>
+        <span class="job-location">Englewood, CO</span>
+      </div>
+      <div class="job-title-line">
+        <span class="job-title">Business Operations Analyst III</span>
+        <span class="job-dates">Feb 2018 – Jan 2020</span>
+      </div>
+      <ul class="bullets">
+        <li>Delivered $250K+ annual savings by automating agent workflows, improving productivity 13% and eliminating the need for 5+ additional hires</li>
+        <li>Developed real-time customer service analytics for 100+ agents, improving response times 25% and satisfaction scores 15%; engineered fraud detection filtering for agent performance metrics</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <span class="job-company">NTT DATA CONSULTING, INC.</span>
+        <span class="job-location">Irving, TX</span>
+      </div>
+      <div class="job-title-line">
+        <span class="job-title">Business Analyst</span>
+        <span class="job-dates">Feb 2015 – Feb 2018</span>
+      </div>
+      <ul class="bullets">
+        <li>Automated reporting for a Top 4 U.S. Bank using Python, SQL, and VBA, replacing 40 hours/week manual work; promoted to specialized role recognizing automation expertise</li>
+        <li>Managed client delivery on the largest financial services engagement in company history, presenting analytics and project updates to C-level bank executives</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Education</div>
+    <div><span class="edu-school">University of Colorado at Boulder</span>, <span class="edu-detail">Boulder, CO</span></div>
+    <div class="edu-detail">Bachelor of Arts in Economics &bull; 2008 – 2011</div>
+  </section>
+
+  <div class="footer">Built with care &mdash; last updated June 2026</div>
+</div>
+<script>
+function toggleTheme() {
+  const h = document.documentElement, b = document.getElementById('theme-btn');
+  if (h.getAttribute('data-theme') === 'dark') { h.setAttribute('data-theme','light'); b.textContent='Dark'; }
+  else { h.setAttribute('data-theme','dark'); b.textContent='Light'; }
+}
+function toggleDetail(li) { const d = li.querySelector('.bullet-detail'); if(d) d.classList.toggle('open'); }
+function toggleDetails() {
+  const ds = document.querySelectorAll('.bullet-detail'), b = document.getElementById('detail-btn');
+  const any = Array.from(ds).some(d => d.classList.contains('open'));
+  ds.forEach(d => { if(any) d.classList.remove('open'); else d.classList.add('open'); });
+  b.textContent = any ? '+ Details' : '- Details';
+}
+</script>
+</body>
+</html>
