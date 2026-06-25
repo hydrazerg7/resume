@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +26,10 @@ a:hover { text-decoration: underline; }
 
 /* Toolbar */
 .toolbar { position: fixed; top: 0; right: 0; display: flex; gap: 0.5rem; padding: 1rem; z-index: 100; }
-.toolbar button { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text-secondary);
-  padding: 0.4rem 0.75rem; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem;
-  transition: all var(--transition); }
-.toolbar button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.toolbar button { background: var(--bg); border: 2px solid var(--accent); color: var(--accent);
+  padding: 0.45rem 0.9rem; border-radius: var(--radius); cursor: pointer; font-size: 0.8rem;
+  font-weight: 600; transition: all var(--transition); box-shadow: var(--shadow); }
+.toolbar button:hover { background: var(--accent); color: var(--bg); }
 
 /* Header */
 .header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--accent); }
@@ -134,7 +134,7 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
 <div class="toolbar">
-  <button onclick="toggleTheme()" id="theme-btn" title="Toggle dark mode">Dark</button>
+  <button onclick="toggleTheme()" id="theme-btn" title="Toggle light mode">Light</button>
   <button onclick="window.print()" title="Print / Save as PDF">Print</button>
   <button onclick="toggleDetails()" id="detail-btn" title="Expand/collapse details">+ Details</button>
 </div>
@@ -247,8 +247,8 @@ a:hover { text-decoration: underline; }
 <script>
 function toggleTheme() {
   const h = document.documentElement, b = document.getElementById('theme-btn');
-  if (h.getAttribute('data-theme') === 'dark') { h.setAttribute('data-theme','light'); b.textContent='Dark'; }
-  else { h.setAttribute('data-theme','dark'); b.textContent='Light'; }
+  if (h.getAttribute('data-theme') === 'dark') { h.setAttribute('data-theme','light'); b.textContent='Dark'; b.title='Toggle dark mode'; }
+  else { h.setAttribute('data-theme','dark'); b.textContent='Light'; b.title='Toggle light mode'; }
 }
 function toggleDetail(li) { const d = li.querySelector('.bullet-detail'); if(d) { d.classList.toggle('open'); li.classList.toggle('active'); } }
 function toggleDetails() {
